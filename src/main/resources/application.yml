@@ -2,7 +2,7 @@ server:
   port: 8081
 spring:
   datasource:
-    url: ${JDBC_CONNECTION_URL}
+    url: ${JDBC_CONNECTION_URL_MY_TUBE}
     username: ${JDBC_CONNECTION_USERNAME}
     password: ${JDBC_CONNECTION_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
