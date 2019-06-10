@@ -1,5 +1,5 @@
 server:
-  port: 80
+  port: 8081
 spring:
   datasource:
     url: ${JDBC_CONNECTION_URL_MY_TUBE}
