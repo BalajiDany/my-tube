@@ -2,6 +2,7 @@ package com.showcase.mytube.model;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,9 +15,12 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+@Data
 @Entity
 @Table(name = "user")
 public class UserDetailsModel implements UserDetails {
@@ -57,7 +61,11 @@ public class UserDetailsModel implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+		return userRoleModelList.stream()
+				.map(UserRoleModel::getName)
+				.map(role -> "ROLE_" + role)
+				.map(SimpleGrantedAuthority::new)
+				.collect(Collectors.toList());
 	}
 
 	@Override

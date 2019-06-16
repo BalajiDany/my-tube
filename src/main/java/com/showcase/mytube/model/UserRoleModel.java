@@ -20,17 +20,18 @@ import lombok.Data;
 @Table(name = "role")
 public class UserRoleModel {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
-	@Column(name = "name")
-	private String name;
+    @Column(name = "name")
+    private String name;
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(
-			name = "permission_role",
-			joinColumns = { @JoinColumn(name = "role_id", referencedColumnName = "id") },
-			inverseJoinColumns = { @JoinColumn(name = "permission_id", referencedColumnName = "id") })
-	private List<UserPermissionModel> userPermissionModel;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "permission_role",
+            joinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "permission_id", referencedColumnName = "id")})
+    private List<UserPermissionModel> userPermissionModel;
+
 }

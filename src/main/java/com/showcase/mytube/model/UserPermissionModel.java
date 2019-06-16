@@ -14,10 +14,11 @@ import lombok.Data;
 @Table(name = "permission")
 public class UserPermissionModel {
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name = "name")
     private String name;
+
 }
