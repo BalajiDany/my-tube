@@ -44,3 +44,12 @@ create table if not exists role_user (
   constraint role_user_ibfk_1 foreign key (role_id) references role (id),
   constraint role_user_ibfk_2 foreign key (user_id) references user (id)
 ) engine=innodb ;
+
+create table if not exists  user_file (
+  video_id int(11) not null auto_increment,
+  user_id int(11) default null,
+  file_name varchar(100) not null,
+  file_path varchar(1024) not null,
+  primary key (video_id),
+  constraint user_file_ibfk_1 foreign key (user_id) references user (id)
+) engine=innodb ;

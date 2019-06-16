@@ -20,5 +20,4 @@ public class UserPermissionModel {
 
     @Column(name = "name")
     private String name;
-
 }
