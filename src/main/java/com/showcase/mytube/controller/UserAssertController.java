@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.security.RolesAllowed;
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @RestController
@@ -40,11 +41,16 @@ public class UserAssertController {
                 .body(userAssertService.getByUserName(userName, limit, offset));
     }
 
-    @PutMapping("/upload")
+    @PostMapping("/upload")
     public ResponseEntity<UserAssertEntity> upload(@RequestParam("file") MultipartFile file,
                                                    Principal principal) {
         return ResponseEntity.accepted()
                 .body(userAssertService.uploadFile(file, principal.getName()));
     }
 
+    @PostMapping("/delete")
+    public ResponseEntity<Boolean> delete(@RequestParam String fileKey) {
+        return ResponseEntity.accepted()
+                .body(userAssertService.deleteFile(fileKey));
+    }
 }

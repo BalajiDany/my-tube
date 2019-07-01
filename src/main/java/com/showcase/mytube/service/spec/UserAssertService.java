@@ -10,4 +10,6 @@ public interface UserAssertService {
     List<UserAssertEntity> getByUserName(String userName, int limit, int offset);
 
     UserAssertEntity uploadFile(MultipartFile file, String userName);
+
+    boolean deleteFile(String fileKey);
 }

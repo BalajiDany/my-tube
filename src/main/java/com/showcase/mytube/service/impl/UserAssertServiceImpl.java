@@ -1,9 +1,7 @@
 package com.showcase.mytube.service.impl;
 
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.amazonaws.services.s3.model.S3Object;
 import com.showcase.mytube.entity.UserAssertEntity;
 import com.showcase.mytube.model.UserDetailsModel;
 import com.showcase.mytube.model.UserFileModel;
@@ -27,7 +25,6 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class UserAssertServiceImpl implements UserAssertService {
-
 
     @Value("${aws.s3.bucketName}")
     private String bucketName;
@@ -84,6 +81,16 @@ public class UserAssertServiceImpl implements UserAssertService {
             }
         }
         return UserAssertEntity.modelToEntity(userFileModel);
+    }
+
+    @Override
+    public boolean deleteFile(String fileKey) {
+        s3client.deleteObject(bucketName, fileKey);
+        Optional<UserFileModel> optionlFileModal = userFileRepository.findByFilePath(fileKey);
+        if (optionlFileModal.isPresent()) {
+            userFileRepository.delete(optionlFileModal.get());
+        }
+        return true;
     }
 
     private File convertMultiPartToFile(MultipartFile file) throws Exception {
